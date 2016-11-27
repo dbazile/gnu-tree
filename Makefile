@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-prefix = /usr
+prefix = /usr/local
 
 CC=gcc
 
@@ -30,7 +30,7 @@ OBJS=tree.o unix.o html.o xml.o json.o hash.o color.o
 # Uncomment options below for your particular OS:
 
 # Linux defaults:
-CFLAGS=-ggdb -Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+#CFLAGS=-ggdb -Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
 #CFLAGS=-O4 -Wall  -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
 #LDFLAGS=-s
 
@@ -53,11 +53,11 @@ CFLAGS=-ggdb -Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
 #OBJS+=strverscmp.o
 
 # Uncomment for OS X:
-#CC=cc
-#CFLAGS=-O2 -Wall -fomit-frame-pointer -no-cpp-precomp
-#LDFLAGS=
-#MANDIR=/usr/share/man/man1
-#OBJS+=strverscmp.o
+CC=cc
+CFLAGS=-O2 -Wall -fomit-frame-pointer -no-cpp-precomp
+LDFLAGS=
+MANDIR=${prefix}/share/man/man1
+OBJS+=strverscmp.o
 
 # Uncomment for HP/UX:
 #CC=cc
@@ -105,7 +105,7 @@ install: tree
 distclean:
 	if [ -f tree.o ]; then rm *.o; fi
 	rm -f *~
-	
+
 
 dist:	distclean
 	tar zcf ../tree-$(VERSION).tgz -C .. `cat .tarball`
